@@ -1,32 +1,29 @@
 <!doctype html>
 <html>
 <style>
-form {
-    margin: auto;
-    width: 35%;
-}
+    form {
+        margin: auto;
+        width: 35%;
+    }
 
-.result {
-    margin: auto;
-    width: 35%;
-    border: 1px solid #ccc;
-}
+    .result {
+        margin: auto;
+        width: 35%;
+        border: 1px solid #ccc;
+    }
 </style>
 
 <head>
-    <title>Bike Usage Model</title>
+    <title>Rating Predictor</title>
 </head>
+
+<h1>Rating Predictor</h1>
+
 <form action="{{ url_for('main') }}" method="POST">
     <fieldset>
         <legend>Input values:</legend>
-        Temperature:
-        <input name="temperature" type="number" required>
-        <br>
-        <br> Humidity:
-        <input name="humidity" type="number" required>
-        <br>
-        <br> Windspeed:
-        <input name="windspeed" type="number" required>
+        Enter a review to get a predicted rating on a scale of 0 to 10:
+        <input name="review" type="text" required>
         <br>
         <br>
         <input type="submit">
@@ -35,12 +32,14 @@ form {
 <br>
 <div class="result" align="center">
     {% if result %}
-    	{% for variable, value in original_input.items() %}
-    		<b>{{ variable }}</b> : {{ value }}
-    	{% endfor %}
-		<br>
-    	<br> Predicted number of bikes in use:
-   		<p style="font-size:50px">{{ result }}</p>
+    {% for variable, value in original_input.items() %}
+    <b>{{ variable }}</b> : {{ value }}
+    {% endfor %}
+    <br>
+    <br> Predicted rating :
+    <p style="font-size:50px">{{ result }}</p>
+    <br> Class probabilities (from 0 to 10) :
+    <p>{{ probabilities }}</p>
     {% endif %}
 </div>
 
