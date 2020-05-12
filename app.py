@@ -1,7 +1,5 @@
 import flask
 import pickle
-import pandas as pd
-from sklearn.feature_extraction.text import CountVectorizer
 
 # Use pickle to load in the pre-trained model
 with open(f'model/model.pk', 'rb') as f:
@@ -33,7 +31,8 @@ def main():
         return flask.render_template('main.html',
                                      original_input={'Review':review},
                                      result=prediction,
-                                     probabilities=prediction_proba
+                                     probabilities=prediction_proba,
+                                     count=len(prediction_proba)
                                      )
 
 if __name__ == '__main__':

@@ -14,24 +14,28 @@
 </style>
 
 <head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+        crossorigin="anonymous">
     <title>Rating Predictor</title>
 </head>
 
-<h1>Rating Predictor</h1>
+<div align="center">
+    <h1>RATINGS PREDICTOR</h1>
+</div>
+<br>
 
-<form action="{{ url_for('main') }}" method="POST">
+<form action="{{ url_for('main') }}" method="POST" align="center">
     <fieldset>
-        <legend>Input values:</legend>
         Enter a review to get a predicted rating on a scale of 0 to 10:
-        <input name="review" type="text" required>
+        <textarea name="review" class="form-control" required></textarea>
         <br>
         <br>
-        <input type="submit">
+        <button type="submit" class="btn btn-primary">Submit</button>
     </fieldset>
 </form>
 <br>
+{% if result %}
 <div class="result" align="center">
-    {% if result %}
     {% for variable, value in original_input.items() %}
     <b>{{ variable }}</b> : {{ value }}
     {% endfor %}
@@ -39,8 +43,25 @@
     <br> Predicted rating :
     <p style="font-size:50px">{{ result }}</p>
     <br> Class probabilities (from 0 to 10) :
-    <p>{{ probabilities }}</p>
-    {% endif %}
+
+    <table class="table">
+        <tbody>
+            {% for i in range(0, count) %}
+            <tr>
+                <td>{{ i }}</td>
+                <td>{{ probabilities[i] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+{% endif %}
+<br>
+<br>
+<div align="center">
+    For more details, please refer <a href="https://www.kaggle.com/saeedjassani/ratings-predictor">this</a> blog post.
+
 </div>
 
 </html>
