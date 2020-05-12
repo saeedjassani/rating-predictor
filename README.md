@@ -14,6 +14,8 @@ Step 2 - Install required dependencies:
 Install the following dependencies (Ex. `pip install name_of_dependency`):
 1. flask
 2. pickle
+3. sklearn
+4. pandas
 
 Step 3 - Run the project:
 
